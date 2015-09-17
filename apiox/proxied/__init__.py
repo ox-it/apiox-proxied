@@ -39,7 +39,7 @@ def hook_in(app):
         app['definitions'][name] = definition
 
         app.router.add_route('*', '/{path}/{{path:.*}}'.format(path=path),
-                             ReverseProxyHandler(apis[name]['href']),
+                             ReverseProxyHandler(app, apis[name]['href']),
                              name='{name}:reverse-proxy'.format(name=name))
         app.router.add_route('*', '/{path}/'.format(path=path),
                              lambda request: None,
